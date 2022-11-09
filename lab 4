@@ -1,0 +1,140 @@
+#include <iostream>
+
+int main()
+{
+	
+	//проверка на сумму цифр == 14
+	std::cout << "	TASK 4.1" << std::endl;
+	std::cout << "enter the number of elements in the sequence" << std::endl;
+	int mass[10000];
+	int x;
+	std::cin >> x;
+	std::cout << "enter sequence numbers" << std::endl;
+	for (int i = 0; i < x; i++)
+		std::cin >> mass[i];
+	bool sum14 = false;
+	for (int i = 0; i < x; i++)
+	{
+		int cur_num = mass[i];
+		int sum_of_digits = 0;
+		while (cur_num > 0)
+		{
+			sum_of_digits += cur_num % 10;
+			cur_num = cur_num / 10;
+
+		}
+		if (sum_of_digits == 14)
+		{
+			sum14 = true;
+		}
+	}
+	// сортировка по возрастанию
+	for (int i = 0; i < x - 1; i++)
+		for (int j = i + 1; j < x; j++)
+			if (mass[i] > mass[j])
+			{
+				int buff = mass[i];
+				mass[i] = mass[j];
+				mass[j] = buff;
+			}
+	for (int i = 0; i < x; i++)
+		std::cout << mass[i] << std::endl;
+
+
+		//ЗАДАЧА 2
+/*Ввести последовательность натуральных чисел{Aj}j = 1...n(n <= 1000).
+ 1) Упорядочить последовательность по неубыванию первой цифры числа
+ 2) числа с одинаковыми первыми цифрами дополнительно упорядочить по неубыванию наибольшей цифры числа
+ 3) числа с одинаковыми первыми цифрами и одинаковыми наибольшими цифрами дополнительно упорядочить по неубыванию самого числа.*/
+	std::cout << "	TASK 4.2" << std::endl;
+	std::cout << "enter the number of elements in the sequence" << std::endl;
+	 int n;
+	 int mas[1000];
+	 int digits[1000];
+	 int maxx[1000];
+	 int temp = 0;
+	 std::cin >> n;
+	 for (int i = 0; i < n; i++)
+	 {
+		 std::cin >> mas[i];
+		 int cur = mas[i];
+		 int maxxdig = 0;
+		 digits[i] = cur;
+		 while (temp < 0)
+		 {
+			 if (maxxdig < cur % 10)
+			 {
+				 maxxdig = cur % 10;
+			 }
+			 cur /= 10;
+		 }
+		 maxx[i] = maxxdig;
+	 }
+	 for (int i = 0; i < n - 1; i++)
+	 {
+		 for (int j = i + 1; j < n; j++)
+		 {
+			 if ((digits[i] > digits[j]) or (digits[i] == digits[j] and maxx[i] > maxx[j]) or (digits[i] == digits[j] and maxx[i] == maxx[j] and mas[i] > mas[j]))
+			 {
+				 std::swap(mas[i], mas[j]);
+
+			 }
+		 }
+	 }
+	 for (int i = 0; i < n; i++)
+	 {
+		 std::cout << mas[i] << std::endl;
+	 }
+	 
+
+	 //ЗАДАЧА 3
+//Дана целочисленная матрица{ Aij }i = 1..n, j = 1..m(n, m <= 100).
+//Найти столбец содержащий наименьший элемент матрицы и заменить все отрицательные элементы этого столбца числом 0.
+	
+	std::cout << "	TASK 4.3" << std::endl;;
+	int t;
+	int m;
+	std::cout << "Enter the number of rows in the array: " << std::endl;
+	std::cin >>t;
+	std::cout << "Enter the number of array columns: " << std::endl;
+	std::cin >> m;
+	int matrix[100][100];
+	matrix[t][m];
+	int ind_j;
+	int min = 100;
+
+	std::cout << "Enter array elements: " << std::endl;
+	for (int i = 0; i < t; i++) // 1 строка
+	{
+		for (int j = 0; j < m; j++) // 2 строка
+		{
+			std::cin >> matrix[i][j];
+			if (matrix[i][j] < min) 
+			{
+				min = matrix[i][j];
+				ind_j = j;
+			}
+		}
+	}
+	for (int i = 0; i <t; i++) 
+	{
+		if (matrix[i][ind_j] < 0) 
+		{
+			matrix[i][ind_j] = 0;
+		}
+	}
+	for (int i = 0; i < t; i++) 
+	{
+		for (int j = 0; j < m; j++) 
+		{
+			std::cout << matrix[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+
+
+		
+
+
+	
+}
